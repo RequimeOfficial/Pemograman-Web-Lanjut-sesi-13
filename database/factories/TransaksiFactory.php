@@ -7,67 +7,69 @@ use App\Models\Pelanggan;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use RuntimeException;
+use Illuminate\Support\Carbon;
 
-/** @extends Factory<Transaksi> */
+/**
+ * Relasi induk didefinisikan sebagai factory. Saat seeding, gunakan
+ * ->recycle($pelanggan)->recycle($layanan)->recycle($kasir) agar memakai data
+ * yang sudah ada, bukan membuat data induk baru.
+ *
+ * @extends Factory<Transaksi>
+ */
 class TransaksiFactory extends Factory
 {
     protected $model = Transaksi::class;
 
     public function definition(): array
     {
-        // Mengambil layanan yang sudah tersedia di database.
-        $layanan = Layanan::query()->inRandomOrder()->first();
-
-        if (! $layanan) {
-            throw new RuntimeException(
-                'Data layanan belum tersedia. Buat data layanan terlebih dahulu.'
-            );
-        }
-
-        // Mengambil pelanggan yang sudah tersedia.
-        $pelanggan = Pelanggan::query()->inRandomOrder()->first();
-
-        if (! $pelanggan) {
-            throw new RuntimeException(
-                'Data pelanggan belum tersedia. Buat data pelanggan terlebih dahulu.'
-            );
-        }
-
-        // Mengambil user yang memiliki peran kasir.
-        $kasir = User::query()
-            ->where('role', 'kasir')
-            ->inRandomOrder()
-            ->first();
-
-        if (! $kasir) {
-            throw new RuntimeException(
-                'Data kasir belum tersedia. Buat user dengan role kasir terlebih dahulu.'
-            );
-        }
-
-        // Menentukan berat laundry antara 1 sampai 10 kg.
-        $berat = fake()->randomFloat(2, 1, 10);
-
         return [
-            'pelanggan_id' => $pelanggan->id,
+            'pelanggan_id' => Pelanggan::factory(),
+            'layanan_id' => Layanan::factory(),
+            'kasir_id' => User::factory()->kasir(),
 
-            'layanan_id' => $layanan->id,
+            // Berat cucian kiloan wajar: 1–10 kg
+            'berat_kg' => fake()->randomFloat(2, 1, 10),
 
-            'kasir_id' => $kasir->id,
+            // Total = berat x tarif layanan (tambahan dihitung di seeder)
+            'total_harga' => fn (array $a) => round($a['berat_kg'] * (float) Layanan::find($a['layanan_id'])->harga_per_kg),
 
-            'berat_kg' => $berat,
+            // Sebaran 90 hari terakhir supaya laporan per bulan terisi
+            'tanggal_masuk' => fake()->dateTimeBetween('-90 days', 'now')->format('Y-m-d'),
 
-            'total_harga' => round(
-                $berat * (float) $layanan->harga_per_kg,
-                2
-            ),
+            'status' => fake()->randomElement(Transaksi::STATUS),
 
-            'status' => 'diterima',
+            // Hanya transaksi selesai/diambil yang punya tanggal selesai
+            'tanggal_selesai' => fn (array $a) => in_array($a['status'], ['selesai', 'diambil'], true)
+                ? Carbon::parse($a['tanggal_masuk'])->addDays(Layanan::find($a['layanan_id'])->estimasi_hari)->min(today())->toDateString()
+                : null,
 
-            'tanggal_masuk' => now()->toDateString(),
-
-            'tanggal_selesai' => null,
+            'catatan' => fake()->optional(0.3)->randomElement([
+                'Pisahkan pakaian putih.',
+                'Jangan pakai pemutih.',
+                'Lipat rapi, tanpa hanger.',
+                'Ada noda kopi di kemeja.',
+                'Diantar ke alamat pelanggan.',
+            ]),
         ];
+    }
+
+    public function diterima(): static
+    {
+        return $this->state(fn () => ['status' => 'diterima']);
+    }
+
+    public function diproses(): static
+    {
+        return $this->state(fn () => ['status' => 'diproses']);
+    }
+
+    public function selesai(): static
+    {
+        return $this->state(fn () => ['status' => 'selesai']);
+    }
+
+    public function diambil(): static
+    {
+        return $this->state(fn () => ['status' => 'diambil']);
     }
 }

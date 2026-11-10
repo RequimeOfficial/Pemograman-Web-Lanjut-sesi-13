@@ -71,14 +71,36 @@ Buka `http://localhost:8000`.
 | Pelanggan     | pelanggan1@silaundry.test   | password123   |
 | Pelanggan     | pelanggan2@silaundry.test   | password123   |
 
+## Basis Data (LKP Pertemuan 4)
+
+![ERD SiLaundry](screenshots/erd_proyek.png)
+
+| Tabel | Model | Peran |
+|-------|-------|-------|
+| `users` | `User` | Akun & role (admin / kasir / pelanggan) |
+| `pelanggan` | `Pelanggan` | Data pelanggan, 1:1 dengan `users` |
+| `layanan` | `Layanan` | Master layanan utama + tarif per kg |
+| `tambahan` | `Tambahan` | Master layanan tambahan (parfum, hanger, dll.) |
+| `transaksi` | `Transaksi` | Transaksi laundry (pelanggan, layanan, kasir) |
+| `tambahan_transaksi` | — (pivot) | Relasi N:M transaksi ⟷ tambahan + jumlah/harga |
+| `pembayaran` | `Pembayaran` | Riwayat pembayaran (DP / pelunasan), 1:N dari transaksi |
+| `notifikasi` | `Notifikasi` | Notifikasi status, 1:N dari transaksi |
+
+- Sumber ERD: `docs/erd/silaundry.dbml` (format dbdiagram.io) dan `docs/erd/erd.html` (render ke PNG).
+- Urutan seeder: `UserSeeder` → `LayananSeeder` → `TambahanSeeder` → `PelangganSeeder` → `TransaksiSeeder`.
+- `php artisan migrate:fresh --seed` menghasilkan 25 user, 22 pelanggan, 5 layanan, 6 tambahan, 60 transaksi,
+  beserta isi pivot, pembayaran, dan notifikasi (jumlahnya acak tetapi selalu konsisten dengan total harga & status).
+- Lembar kerja: [`LKP04_2495114006_AhmadMofidurRobbiyalAqla.md`](LKP04_2495114006_AhmadMofidurRobbiyalAqla.md).
+
 ## Pengujian
 
 ```bash
 php artisan test
 ```
 
-Test fitur berada di `tests/Feature/MultiRoleLoginTest.php` dan `tests/Feature/UserManagementTest.php`
-(menggunakan SQLite in-memory, butuh ekstensi `pdo_sqlite`).
+Test fitur berada di `tests/Feature/MultiRoleLoginTest.php`, `tests/Feature/UserManagementTest.php`, dan
+`tests/Feature/DatabaseRelasiTest.php` (relasi, constraint, factory & seeder). Menggunakan SQLite in-memory,
+butuh ekstensi `pdo_sqlite`.
 
 ## Struktur File Utama
 
@@ -95,4 +117,6 @@ Test fitur berada di `tests/Feature/MultiRoleLoginTest.php` dan `tests/Feature/U
 | `resources/views` | Tampilan: layouts (app, guest), partials (sidebar, flash), components (`x-ui.*`, `x-form.*`), auth, dashboard, users, errors |
 | `resources/css/app.css`, `resources/js/app.js` | Tema Tailwind (palet brand hijau), Alpine.js, ikon Lucide |
 | `public/img/logo.png` | Logo SiLaundry (PNG transparan) |
-| `screenshots/` | Bukti tangkapan layar pengujian LKP Pertemuan 5 |
+| `database/factories` | Factory data dummy (Faker locale `id_ID`) |
+| `docs/erd/` | Sumber ERD (DBML + HTML) |
+| `screenshots/` | Bukti tangkapan layar: ERD & verifikasi DBMS (LKP 4), pengujian login multi role (LKP 5) |

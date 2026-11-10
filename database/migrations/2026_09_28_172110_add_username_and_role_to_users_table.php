@@ -9,8 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->nullable()->unique();
-            $table->string('role')->nullable();
+            $table->string('username', 50)->nullable()->unique()->after('name');
+            // admin | kasir | pelanggan
+            $table->string('role', 20)->nullable()->index()->after('username');
         });
     }
 
@@ -18,6 +19,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropUnique(['username']);
+            $table->dropIndex(['role']);
             $table->dropColumn(['username', 'role']);
         });
     }

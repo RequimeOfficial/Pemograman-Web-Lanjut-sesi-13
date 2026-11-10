@@ -13,19 +13,13 @@ class LayananFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_layanan' => fake()->randomElement([
-                'Cuci Reguler',
-                'Cuci Express',
-                'Cuci Setrika',
-                'Setrika Saja',
-            ]),
-
-            'harga_per_kg' => fake()->randomElement([
-                5000,
-                7000,
-                10000,
-                12000,
-            ]),
+            // Kombinasi jenis + kecepatan agar nama unik tetapi tetap realistis
+            'nama_layanan' => fake()->unique()->randomElement(['Cuci Kering', 'Cuci Setrika', 'Setrika Saja', 'Cuci Sepatu', 'Cuci Bedcover'])
+                .' '.fake()->randomElement(['Reguler', 'Express', 'Kilat', 'Premium']),
+            // Kelipatan Rp500 seperti tarif laundry sebenarnya
+            'harga_per_kg' => fake()->numberBetween(10, 30) * 500,
+            'estimasi_hari' => fake()->numberBetween(1, 3),
+            'deskripsi' => fake()->optional(0.7)->sentence(8),
         ];
     }
 }

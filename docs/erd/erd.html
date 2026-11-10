@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>ERD SiLaundry</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; font-family: "Segoe UI", Arial, sans-serif; color: #1f2937; }
+  #canvas { position: relative; width: 1600px; height: 1010px; }
+  h1 { position: absolute; left: 60px; top: 14px; margin: 0; font-size: 22px; color: #065f46; }
+  .sub { position: absolute; left: 60px; top: 44px; font-size: 13px; color: #6b7280; }
+  .tbl { position: absolute; width: 300px; border: 1.5px solid #059669; border-radius: 8px; overflow: hidden;
+         background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.08); z-index: 2; }
+  .tbl .hd { background: #059669; color: #fff; font-weight: 700; font-size: 14px; padding: 7px 10px; }
+  .tbl .hd.pivot { background: #b45309; }
+  .row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; height: 23px;
+         padding: 0 10px; border-top: 1px solid #e5e7eb; }
+  .row .n { display: flex; gap: 6px; align-items: center; }
+  .row .t { color: #6b7280; font-family: Consolas, monospace; font-size: 11px; }
+  .k { font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px; }
+  .pk { background: #fde68a; color: #92400e; }
+  .fk { background: #bfdbfe; color: #1e40af; }
+  .uq { background: #e9d5ff; color: #6b21a8; }
+  .nl { color: #9ca3af; font-size: 10px; }
+  svg { position: absolute; left: 0; top: 0; z-index: 1; }
+  .legend { position: absolute; left: 60px; bottom: 16px; font-size: 12px; color: #374151; display: flex; gap: 18px; align-items: center; }
+</style>
+</head>
+<body>
+<div id="canvas">
+  <h1>ERD — SiLaundry (Sistem Informasi Manajemen Laundry)</h1>
+  <div class="sub">Basis data MySQL <b>silaundry</b> · 8 tabel domain · notasi crow's foot (garis bercabang = banyak, garis tegak = satu)</div>
+  <svg id="lines" width="1600" height="1010"></svg>
+</div>
+<script>
+const T = {
+  users: { x: 60, y: 90, cols: [
+    ['id','bigint','pk'],['name','varchar(255)'],['username','varchar(50)','uq','null'],['role','varchar(20)','','null'],
+    ['email','varchar(255)','uq'],['email_verified_at','timestamp','','null'],['password','varchar(255)'],
+    ['remember_token','varchar(100)','','null'],['created_at / updated_at','timestamp']]},
+  pembayaran: { x: 60, y: 600, cols: [
+    ['id','bigint','pk'],['transaksi_id','bigint','fk'],['diterima_oleh','bigint','fk','null'],['jumlah','decimal(12,2)'],
+    ['metode','varchar(20)'],['tanggal_bayar','datetime'],['keterangan','varchar(255)','','null'],['created_at / updated_at','timestamp']]},
+  pelanggan: { x: 450, y: 90, cols: [
+    ['id','bigint','pk'],['user_id','bigint','fk uq'],['nama','varchar(100)'],['no_hp','varchar(20)'],['alamat','text'],
+    ['created_at / updated_at','timestamp']]},
+  notifikasi: { x: 450, y: 700, cols: [
+    ['id','bigint','pk'],['transaksi_id','bigint','fk'],['pesan','text'],['tanggal_kirim','datetime','','null'],
+    ['created_at / updated_at','timestamp']]},
+  transaksi: { x: 840, y: 250, cols: [
+    ['id','bigint','pk'],['kode_transaksi','varchar(30)','uq'],['pelanggan_id','bigint','fk'],['layanan_id','bigint','fk'],
+    ['kasir_id','bigint','fk'],['berat_kg','decimal(8,2)'],['total_harga','decimal(12,2)'],['status','varchar(20)'],
+    ['tanggal_masuk','date'],['tanggal_selesai','date','','null'],['catatan','text','','null'],['created_at / updated_at','timestamp']]},
+  layanan: { x: 1230, y: 90, cols: [
+    ['id','bigint','pk'],['nama_layanan','varchar(100)','uq'],['harga_per_kg','decimal(10,2)'],['estimasi_hari','tinyint'],
+    ['deskripsi','text','','null'],['created_at / updated_at','timestamp']]},
+  tambahan_transaksi: { x: 1230, y: 420, pivot: true, cols: [
+    ['id','bigint','pk'],['transaksi_id','bigint','fk'],['tambahan_id','bigint','fk'],['jumlah','smallint'],
+    ['harga_satuan','decimal(10,2)'],['subtotal','decimal(12,2)'],['created_at / updated_at','timestamp']]},
+  tambahan: { x: 1230, y: 760, cols: [
+    ['id','bigint','pk'],['nama','varchar(100)','uq'],['harga','decimal(10,2)'],['satuan','varchar(20)'],['aktif','boolean'],
+    ['created_at / updated_at','timestamp']]},
+};
+
+const canvas = document.getElementById('canvas');
+for (const [name, t] of Object.entries(T)) {
+  const el = document.createElement('div');
+  el.className = 'tbl'; el.id = 't_' + name;
+  el.style.left = t.x + 'px'; el.style.top = t.y + 'px';
+  el.innerHTML = `<div class="hd ${t.pivot ? 'pivot' : ''}">${name}${t.pivot ? '  (pivot N:M)' : ''}</div>` +
+    t.cols.map(([c, ty, keys = '', nul]) => {
+      const badges = keys.split(' ').filter(Boolean).map(k => `<span class="k ${k}">${k.toUpperCase()}</span>`).join('');
+      return `<div class="row" data-col="${c}"><span class="n">${badges}<span>${c}</span>${nul ? '<span class="nl">NULL</span>' : ''}</span><span class="t">${ty}</span></div>`;
+    }).join('');
+  canvas.appendChild(el);
+}
+
+const svg = document.getElementById('lines');
+const NS = 'http://www.w3.org/2000/svg';
+function rowY(tbl, col) {
+  const r = document.querySelector(`#t_${tbl} .row[data-col="${col}"]`);
+  return r.offsetTop + T[tbl].y + r.offsetHeight / 2;
+}
+function edgeX(tbl, side) { return T[tbl].x + (side === 'r' ? 300 : 0); }
+function path(d, color) {
+  const p = document.createElementNS(NS, 'path');
+  p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', color);
+  p.setAttribute('stroke-width', '1.6'); svg.appendChild(p);
+}
+function text(x, y, s, color, rotate) {
+  const t = document.createElementNS(NS, 'text');
+  t.setAttribute('x', x); t.setAttribute('y', y); t.setAttribute('font-size', '12');
+  if (rotate) t.setAttribute('transform', `rotate(-90 ${x} ${y})`);
+  t.setAttribute('font-weight', '700'); t.setAttribute('fill', color); t.textContent = s; svg.appendChild(t);
+}
+// Penanda ujung garis: dir = +1 (garis keluar ke kanan dari tabel) / -1 (ke kiri)
+function many(x, y, dir, color) {
+  path(`M${x + dir * 14},${y} L${x},${y - 7} M${x + dir * 14},${y} L${x},${y} M${x + dir * 14},${y} L${x},${y + 7}`, color);
+  path(`M${x + dir * 18},${y - 7} L${x + dir * 18},${y + 7}`, color);
+}
+function one(x, y, dir, color, optional) {
+  path(`M${x + dir * 8},${y - 7} L${x + dir * 8},${y + 7}`, color);
+  if (optional) {
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', x + dir * 18); c.setAttribute('cy', y); c.setAttribute('r', 4);
+    c.setAttribute('fill', '#fff'); c.setAttribute('stroke', color); c.setAttribute('stroke-width', '1.5'); svg.appendChild(c);
+  } else {
+    path(`M${x + dir * 13},${y - 7} L${x + dir * 13},${y + 7}`, color);
+  }
+}
+/**
+ * Garis ortogonal: keluar dari sisi tabel asal, lewat jalur (lane) x di celah antarkolom,
+ * opsional menyeberang lewat kanal y, lalu masuk ke sisi tabel tujuan.
+ */
+function rel({ from, fcol, fside, to, tcol, tside, lanes, chan, kind, color, label, optional }) {
+  const x1 = edgeX(from, fside), y1 = rowY(from, fcol);
+  const x2 = edgeX(to, tside), y2 = rowY(to, tcol);
+  let d;
+  if (chan === undefined) {
+    d = `M${x1},${y1} H${lanes[0]} V${y2} H${x2}`;
+  } else {
+    d = `M${x1},${y1} H${lanes[0]} V${chan} H${lanes[1]} V${y2} H${x2}`;
+  }
+  path(d, color);
+  const fd = fside === 'r' ? 1 : -1, td = tside === 'r' ? 1 : -1;
+  if (kind === '1:1') one(x1, y1, fd, color); else many(x1, y1, fd, color);
+  one(x2, y2, td, color, optional);
+  if (label) text(label[0], label[1], label[2], color, label[3]);
+}
+
+const C1 = '#047857', C2 = '#1d4ed8', C3 = '#b45309', C4 = '#7c3aed', C5 = '#be123c';
+// Celah: g0 = 360..450, g1 = 750..840, g2 = 1140..1230
+rel({ from: 'pelanggan', fcol: 'user_id', fside: 'l', to: 'users', tcol: 'id', tside: 'r', lanes: [395], kind: '1:1', color: C1, label: [372, 118, '1 : 1'] });
+rel({ from: 'transaksi', fcol: 'pelanggan_id', fside: 'l', to: 'pelanggan', tcol: 'id', tside: 'r', lanes: [790], kind: 'N:1', color: C2, label: [758, 150, 'N : 1'] });
+rel({ from: 'transaksi', fcol: 'layanan_id', fside: 'r', to: 'layanan', tcol: 'id', tside: 'l', lanes: [1185], kind: 'N:1', color: C2, label: [1148, 150, 'N : 1'] });
+rel({ from: 'transaksi', fcol: 'kasir_id', fside: 'l', to: 'users', tcol: 'id', tside: 'r', lanes: [775, 380], chan: 520, kind: 'N:1', color: C5, label: [560, 514, 'N : 1  (kasir_id)'] });
+rel({ from: 'notifikasi', fcol: 'transaksi_id', fside: 'r', to: 'transaksi', tcol: 'id', tside: 'l', lanes: [805], kind: 'N:1', color: C3, label: [758, 760, 'N : 1'] });
+rel({ from: 'pembayaran', fcol: 'transaksi_id', fside: 'r', to: 'transaksi', tcol: 'id', tside: 'l', lanes: [410, 820], chan: 580, kind: 'N:1', color: C4, label: [560, 574, 'N : 1  (transaksi_id)'] });
+rel({ from: 'tambahan_transaksi', fcol: 'transaksi_id', fside: 'l', to: 'transaksi', tcol: 'id', tside: 'r', lanes: [1170], kind: 'N:1', color: C3, label: [1176, 470, 'N : 1'] });
+rel({ from: 'tambahan_transaksi', fcol: 'tambahan_id', fside: 'r', to: 'tambahan', tcol: 'id', tside: 'r', lanes: [1565], kind: 'N:1', color: C3, label: [1500, 705, 'N : 1'] });
+rel({ from: 'pembayaran', fcol: 'diterima_oleh', fside: 'l', to: 'users', tcol: 'id', tside: 'l', lanes: [22], kind: 'N:1', color: C5, optional: true, label: [48, 470, 'N : 0..1', true] });
+
+const lg = document.createElement('div');
+lg.className = 'legend';
+lg.innerHTML = '<span><span class="k pk">PK</span> primary key</span><span><span class="k fk">FK</span> foreign key</span>' +
+  '<span><span class="k uq">UQ</span> unique</span><span><span class="nl">NULL</span> boleh kosong</span>' +
+  '<span>transaksi ⟷ tambahan = <b>N : M</b> melalui pivot <b>tambahan_transaksi</b></span>' +
+  '<span>○ = opsional (FK nullable, set null)</span>';
+canvas.appendChild(lg);
+</script>
+</body>
+</html>

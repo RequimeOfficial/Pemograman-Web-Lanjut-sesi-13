@@ -1,0 +1,112 @@
+// ERD SiLaundry — format DBML (dbdiagram.io)
+// Tempel isi berkas ini ke https://dbdiagram.io untuk melihat/menyunting diagram.
+
+Project silaundry {
+  database_type: 'MySQL'
+  Note: 'Sistem Informasi Manajemen Laundry — LKP Pertemuan 4 (Basis Data, Migrasi, Eloquent & Seeder)'
+}
+
+Table users {
+  id bigint [pk, increment]
+  name varchar(255) [not null]
+  username varchar(50) [unique, null]
+  role varchar(20) [null, note: 'admin | kasir | pelanggan']
+  email varchar(255) [unique, not null]
+  email_verified_at timestamp [null]
+  password varchar(255) [not null]
+  remember_token varchar(100) [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table pelanggan {
+  id bigint [pk, increment]
+  user_id bigint [unique, not null, note: 'FK users.id, cascade on delete']
+  nama varchar(100) [not null]
+  no_hp varchar(20) [not null]
+  alamat text [not null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table layanan {
+  id bigint [pk, increment]
+  nama_layanan varchar(100) [unique, not null]
+  harga_per_kg decimal(10,2) [not null]
+  estimasi_hari tinyint [not null, default: 2]
+  deskripsi text [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table tambahan {
+  id bigint [pk, increment]
+  nama varchar(100) [unique, not null]
+  harga decimal(10,2) [not null]
+  satuan varchar(20) [not null, default: 'pcs']
+  aktif boolean [not null, default: true]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table transaksi {
+  id bigint [pk, increment]
+  kode_transaksi varchar(30) [unique, not null]
+  pelanggan_id bigint [not null, note: 'FK pelanggan.id, cascade']
+  layanan_id bigint [not null, note: 'FK layanan.id, restrict']
+  kasir_id bigint [not null, note: 'FK users.id, restrict']
+  berat_kg decimal(8,2) [not null]
+  total_harga decimal(12,2) [not null]
+  status varchar(20) [not null, default: 'diterima', note: 'diterima | diproses | selesai | diambil']
+  tanggal_masuk date [not null]
+  tanggal_selesai date [null]
+  catatan text [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table tambahan_transaksi {
+  id bigint [pk, increment]
+  transaksi_id bigint [not null, note: 'FK transaksi.id, cascade']
+  tambahan_id bigint [not null, note: 'FK tambahan.id, restrict']
+  jumlah smallint [not null, default: 1]
+  harga_satuan decimal(10,2) [not null]
+  subtotal decimal(12,2) [not null]
+  created_at timestamp
+  updated_at timestamp
+
+  indexes {
+    (transaksi_id, tambahan_id) [unique]
+  }
+}
+
+Table pembayaran {
+  id bigint [pk, increment]
+  transaksi_id bigint [not null, note: 'FK transaksi.id, cascade']
+  diterima_oleh bigint [null, note: 'FK users.id, set null']
+  jumlah decimal(12,2) [not null]
+  metode varchar(20) [not null, default: 'tunai', note: 'tunai | transfer | qris']
+  tanggal_bayar datetime [not null]
+  keterangan varchar(255) [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table notifikasi {
+  id bigint [pk, increment]
+  transaksi_id bigint [not null, note: 'FK transaksi.id, cascade']
+  pesan text [not null]
+  tanggal_kirim datetime [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Ref: pelanggan.user_id - users.id [delete: cascade]
+Ref: transaksi.pelanggan_id > pelanggan.id [delete: cascade]
+Ref: transaksi.layanan_id > layanan.id [delete: restrict]
+Ref: transaksi.kasir_id > users.id [delete: restrict]
+Ref: tambahan_transaksi.transaksi_id > transaksi.id [delete: cascade]
+Ref: tambahan_transaksi.tambahan_id > tambahan.id [delete: restrict]
+Ref: pembayaran.transaksi_id > transaksi.id [delete: cascade]
+Ref: pembayaran.diterima_oleh > users.id [delete: set null]
+Ref: notifikasi.transaksi_id > transaksi.id [delete: cascade]

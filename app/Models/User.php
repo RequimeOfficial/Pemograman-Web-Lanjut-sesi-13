@@ -97,6 +97,14 @@ class User extends Authenticatable
     }
 
     /**
+     * 1:N — pembayaran yang diterima oleh kasir ini.
+     */
+    public function pembayaranDiterima(): HasMany
+    {
+        return $this->hasMany(Pembayaran::class, 'diterima_oleh');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
