@@ -1,6 +1,6 @@
 # QA SiLaundry — Black-Box & White-Box Testing
 
-Hasil Quality Assurance aplikasi kelompok **SiLaundry** untuk Tugas Pemrograman Web Lanjut Sesi 13.
+Hasil Quality Assurance aplikasi **SiLaundry** oleh Kelompok 2 (Ahmad Mofidur Robbiyal Aqla — 2495114006, Fadli Hasan — 2495114035, M Zakki Asshidiqi — 2495114054) untuk Tugas Pemrograman Web Lanjut Sesi 13.
 Alur kerja mengikuti materi Sesi 13
 (tahap 1 *Application Discovery* → tahap 2 *QA Automation*) dengan Playwright, ditambah white-box testing PHPUnit.
 

@@ -35,6 +35,12 @@ GREY = RGBColor(0x55, 0x5F, 0x6D)
 REPO_URL = "https://github.com/RequimeOfficial/Pemograman-Web-Lanjut-sesi-13"
 PENYUSUN = "Ahmad Mofidur Robbiyal Aqla"
 NIM = "2495114006"
+KELOMPOK = "Kelompok 2"
+ANGGOTA = [
+    ("Ahmad Mofidur Robbiyal Aqla", "2495114006"),
+    ("Fadli Hasan", "2495114035"),
+    ("M Zakki Asshidiqi", "2495114054"),
+]
 
 MODULES = OrderedDict([
     ("ENV", "Validasi Environment"),
@@ -291,9 +297,17 @@ for _ in range(3):
     doc.add_paragraph()
 p = doc.add_paragraph()
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = p.add_run(f"Disusun oleh:\n{PENYUSUN}\nNIM {NIM}")
+r = p.add_run(f"Disusun oleh {KELOMPOK}:")
 r.font.size = Pt(11.5)
-for _ in range(4):
+t = doc.add_table(rows=0, cols=2)
+t.alignment = WD_TABLE_ALIGNMENT.CENTER
+for nama, nim in ANGGOTA:
+    c = t.add_row().cells
+    for cell, txt, w in ((c[0], nama, 6.5), (c[1], nim, 3.0)):
+        cell.width = Cm(w)
+        rr = cell.paragraphs[0].add_run(txt)
+        rr.font.size = Pt(11.5)
+for _ in range(2):
     doc.add_paragraph()
 p = doc.add_paragraph()
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -333,7 +347,7 @@ kv([
     ("Teknologi", "Laravel 13, PHP 8.4.20, MySQL 8.0.30, Blade + Tailwind CSS v4 + Alpine.js"),
     ("URL pengujian", f"{run_info['base_url']} (lingkungan lokal, data seeder)"),
     ("Periode pengujian", "22 November 2026 (Run 1 awal, perbaikan, Run 2 retest & regresi)"),
-    ("Penguji", f"{PENYUSUN} ({NIM})"),
+    ("Penguji", f"{KELOMPOK}: " + ", ".join(f"{n} ({m})" for n, m in ANGGOTA)),
     ("Repositori", REPO_URL),
 ])
 para(
