@@ -92,6 +92,12 @@ Buka `http://localhost:8000`.
   beserta isi pivot, pembayaran, dan notifikasi (jumlahnya acak tetapi selalu konsisten dengan total harga & status).
 - Lembar kerja: [`LKP04_2495114006_AhmadMofidurRobbiyalAqla.md`](LKP04_2495114006_AhmadMofidurRobbiyalAqla.md).
 
+## Quality Assurance (Sesi 13)
+
+Hasil QA black-box (Playwright, 44 test case) dan white-box (PHPUnit, basis path) ada di folder [`QA/`](QA/README.md).
+Laporan: [`QA/reports/Laporan_QA_SiLaundry.pdf`](QA/reports/Laporan_QA_SiLaundry.pdf). Empat bug yang ditemukan sudah
+diperbaiki (commit `Fix BUG-001` s.d. `Fix BUG-004`) dan lulus retest.
+
 ## Pengujian
 
 ```bash
