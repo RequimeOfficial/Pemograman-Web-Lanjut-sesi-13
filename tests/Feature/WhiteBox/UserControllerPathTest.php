@@ -125,4 +125,13 @@ class UserControllerPathTest extends TestCase
             'username' => 'Nama Pengguna minimal 3 karakter.',
         ]);
     }
+
+    /** WB-SEC-1 (regresi BUG-002): halaman yang butuh login dikirim dengan Cache-Control no-store. */
+    public function test_halaman_terautentikasi_tidak_boleh_disimpan_cache(): void
+    {
+        $response = $this->actingAs($this->admin)->get(route('users.index'))->assertOk();
+
+        $this->assertStringContainsString('no-store', $response->headers->get('Cache-Control'));
+        $this->assertSame('no-cache', $response->headers->get('Pragma'));
+    }
 }

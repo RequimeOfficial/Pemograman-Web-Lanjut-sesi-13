@@ -17,7 +17,7 @@ Route::middleware('guest')->group(function () {
         ->name('login.process');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'no-store'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
 
