@@ -55,7 +55,7 @@ class DashboardController extends Controller
             'pelanggan',
             'layanan',
             'kasir',
-        ])->latest()->take(5)->get();
+        ])->orderByDesc('tanggal_masuk')->orderByDesc('id')->take(5)->get();
 
         return view('dashboard.admin', compact(
             'totalPengguna',
@@ -78,7 +78,7 @@ class DashboardController extends Controller
             'pelanggan',
             'layanan',
             'kasir',
-        ])->latest()->take(5)->get();
+        ])->orderByDesc('tanggal_masuk')->orderByDesc('id')->take(5)->get();
 
         return view('dashboard.kasir', compact(
             'totalPelanggan',
@@ -110,7 +110,8 @@ class DashboardController extends Controller
 
             $transaksiTerbaru = (clone $queryTransaksi)
                 ->with(['layanan', 'kasir'])
-                ->latest()
+                ->orderByDesc('tanggal_masuk')
+                ->orderByDesc('id')
                 ->take(5)
                 ->get();
 
