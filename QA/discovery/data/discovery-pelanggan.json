@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-11-22T11:52:12.958Z",
+  "base_url": "http://127.0.0.1:8000",
+  "role": "PELANGGAN",
+  "method": "Playwright read-only crawler (link traversal, tanpa submit form)",
+  "max_pages": 30,
+  "skip_patterns": [
+    "logout",
+    "keluar",
+    "delete",
+    "hapus",
+    "destroy",
+    "remove"
+  ],
+  "unvisited_in_queue": [],
+  "pages": [
+    {
+      "page_id": "P001",
+      "role": "PELANGGAN",
+      "requested_url": "http://127.0.0.1:8000/dashboard/pelanggan",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/dashboard/pelanggan",
+      "redirected": false,
+      "title": "Dashboard · SiLaundry",
+      "headings": [
+        "H1: Selamat malam, Budi Santoso",
+        "H2: RINGKASAN",
+        "H3: Riwayat Laundry"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/pelanggan"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/pelanggan"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/pelanggan"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/pelanggan"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        }
+      ],
+      "buttons": [
+        "BU Budi Santoso Pelanggan"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "ID",
+            "LAYANAN",
+            "BERAT",
+            "TOTAL HARGA",
+            "TANGGAL MASUK",
+            "STATUS"
+          ],
+          "row_count": 1
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P001_PELANGGAN_dashboard-pelanggan.png",
+      "console_errors": [],
+      "failed_requests": []
+    }
+  ]
+}

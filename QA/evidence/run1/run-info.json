@@ -1,0 +1,7 @@
+{
+  "started_at": "2026-11-22T12:06:45.589Z",
+  "base_url": "http://127.0.0.1:8000",
+  "environment": "local",
+  "browser": "Chromium (lokal)",
+  "node": "v22.15.0"
+}

@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-11-22T11:52:10.372Z",
+  "base_url": "http://127.0.0.1:8000",
+  "role": "KASIR",
+  "method": "Playwright read-only crawler (link traversal, tanpa submit form)",
+  "max_pages": 30,
+  "skip_patterns": [
+    "logout",
+    "keluar",
+    "delete",
+    "hapus",
+    "destroy",
+    "remove"
+  ],
+  "unvisited_in_queue": [],
+  "pages": [
+    {
+      "page_id": "P001",
+      "role": "KASIR",
+      "requested_url": "http://127.0.0.1:8000/dashboard/kasir",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/dashboard/kasir",
+      "redirected": false,
+      "title": "Dashboard · SiLaundry",
+      "headings": [
+        "H1: Selamat malam, Kasir SiLaundry",
+        "H2: RINGKASAN",
+        "H3: Transaksi Terbaru"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/kasir"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/kasir"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/kasir"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/kasir"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        }
+      ],
+      "buttons": [
+        "KA Kasir SiLaundry Kasir"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "ID",
+            "PELANGGAN",
+            "LAYANAN",
+            "BERAT",
+            "TOTAL HARGA",
+            "TANGGAL MASUK",
+            "STATUS"
+          ],
+          "row_count": 5
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P001_KASIR_dashboard-kasir.png",
+      "console_errors": [],
+      "failed_requests": []
+    }
+  ]
+}

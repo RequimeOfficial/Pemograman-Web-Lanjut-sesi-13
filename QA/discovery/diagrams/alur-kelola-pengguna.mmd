@@ -1,0 +1,15 @@
+flowchart LR
+    A[Admin: Pengaturan > Pengguna] --> B[+ Tambah]
+    B --> C{Peran = Pelanggan?}
+    C -- Ya --> D[Isi juga No HP & Alamat]
+    C -- Tidak --> E[Simpan]
+    D --> E
+    E --> F{Valid?}
+    F -- Tidak --> B
+    F -- Ya --> G[Akun dibuat + data pelanggan otomatis]
+    G --> H[Pengguna baru login ke dashboard perannya]
+    G --> I[Admin: Ubah data]
+    G --> J[Admin: Hapus + konfirmasi]
+    J --> K{Akun sendiri / punya transaksi?}
+    K -- Ya --> L[Ditolak dengan pesan]
+    K -- Tidak --> M[Akun terhapus, tidak bisa login]

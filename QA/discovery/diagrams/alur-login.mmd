@@ -1,0 +1,16 @@
+flowchart TD
+    A([Buka /]) --> B{Sudah login?}
+    B -- Belum --> C[/login]
+    B -- Sudah --> R
+    C --> D[Isi email & kata sandi, klik Masuk]
+    D --> E{Validasi isian}
+    E -- Gagal --> C
+    E -- Lolos --> F{Sudah 5x gagal?}
+    F -- Ya --> G[Pesan: Terlalu banyak percobaan, tunggu 60 detik] --> C
+    F -- Tidak --> H{Kredensial cocok?}
+    H -- Tidak --> I[Hitungan gagal +1, pesan kredensial salah] --> C
+    H -- Ya --> R{Peran}
+    R -- admin --> RA[/dashboard/admin]
+    R -- kasir --> RK[/dashboard/kasir]
+    R -- pelanggan --> RP[/dashboard/pelanggan]
+    R -- lainnya --> X[Logout paksa + pesan peran tidak dikenali] --> C

@@ -1,0 +1,82 @@
+Auth Controller Path (Tests\Feature\WhiteBox\AuthControllerPath)
+ [x] P1 validasi gagal
+ [x] P2 terkunci oleh rate limiter
+ [x] P3 kredensial salah menambah hitungan
+ [x] P4 role tidak dikenal sesi diakhiri
+ [x] P5 login berhasil membersihkan hitungan
+
+Dashboard Controller Path (Tests\Feature\WhiteBox\DashboardControllerPath)
+ [x] Index p1 tamu diarahkan ke login
+ [x] Index p2 role tidak dikenal dilogout
+ [x] Index p3 diarahkan sesuai role
+ [x] Pelanggan p1 tanpa profil
+ [x] Pelanggan p2 hanya transaksi sendiri
+ [ ] Transaksi terbaru diurutkan dari tanggal masuk terbaru
+
+Database Relasi (Tests\Feature\DatabaseRelasi)
+ [x] Relasi satu ke satu user dan pelanggan
+ [x] User id pelanggan unik sehingga benar benar satu ke satu
+ [x] Relasi satu ke banyak dan kebalikannya
+ [x] Relasi banyak ke banyak lewat tabel pivot
+ [x] Pembayaran dan notifikasi milik transaksi
+ [x] Kode transaksi dibuat otomatis
+ [x] Hapus transaksi ikut menghapus data anak cascade
+ [x] Layanan yang dipakai transaksi tidak bisa dihapus restrict
+ [x] Kasir dihapus pembayaran tetap ada null on delete
+ [x] Database seeder mengisi semua tabel secara konsisten
+ [x] Seeder bisa dijalankan ulang tanpa duplikasi data master
+
+Example (Tests\Feature\Example)
+ [x] Root redirects guest to login
+
+Example (Tests\Unit\Example)
+ [x] That true is true
+
+Multi Role Login (Tests\Feature\MultiRoleLogin)
+ [x] Login page can be rendered
+ [x] Guest is redirected to login
+ [x] Each role is redirected to its own dashboard with data set "admin"
+ [x] Each role is redirected to its own dashboard with data set "kasir"
+ [x] Each role is redirected to its own dashboard with data set "pelanggan"
+ [x] Login fails with wrong password
+ [x] User with unknown role cannot login
+ [x] Authenticated user visiting login is sent to dashboard
+ [x] Kasir cannot access admin pages
+ [x] Pelanggan cannot access admin or kasir pages
+ [x] Admin cannot access other role dashboards
+ [x] User can logout
+ [x] Login is locked after too many failed attempts
+ [x] Dashboard shows logo and active role without descriptions with data set "admin"
+ [x] Dashboard shows logo and active role without descriptions with data set "kasir"
+ [x] Dashboard shows logo and active role without descriptions with data set "pelanggan"
+ [x] Forbidden page shows active account
+
+User Controller Path (Tests\Feature\WhiteBox\UserControllerPath)
+ [x] Destroy p1 akun sendiri
+ [x] Destroy p2 kasir bertransaksi
+ [x] Destroy p3 pelanggan bertransaksi
+ [x] Destroy p4 berhasil
+ [x] Index jalur filter
+ [x] Update after hook
+ [x] Role middleware jalur
+ [ ] Pesan validasi min max berbahasa indonesia
+
+User Management (Tests\Feature\UserManagement)
+ [x] Admin can view user list
+ [x] Admin can search and filter users
+ [x] Admin can open create form
+ [x] Admin can create kasir
+ [x] Creating pelanggan also creates pelanggan profile
+ [x] New user can login with assigned role
+ [x] Create user validates input
+ [x] Pelanggan role requires contact data
+ [x] Admin can open edit form
+ [x] Admin can update name email and role
+ [x] Admin can reset user password
+ [x] Changing role to pelanggan creates profile
+ [x] Admin cannot change own role
+ [x] Admin can delete user
+ [x] Admin cannot delete own account
+ [x] Pelanggan with transactions cannot be deleted
+ [x] Kasir with transactions cannot be deleted
+

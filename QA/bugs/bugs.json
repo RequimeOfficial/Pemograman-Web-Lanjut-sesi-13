@@ -1,0 +1,151 @@
+{
+  "application": "SiLaundry - Sistem Informasi Manajemen Laundry",
+  "environment": "Lokal: php artisan serve http://127.0.0.1:8000, Laravel 13, PHP 8.4.20, MySQL 8.0.30, Chromium (Playwright 1.65.1), Windows 11",
+  "found_in_run": "Run 1 (2026-11-22)",
+  "bugs": [
+    {
+      "bug_id": "BUG-001",
+      "title": "Pesan validasi panjang minimal/maksimal tampil dalam bahasa Inggris",
+      "classification": "Confirmed Bug",
+      "module": "M04 Manajemen Pengguna",
+      "feature": "F09 Tambah Pengguna, F10 Ubah Pengguna",
+      "affected_page": "/users/create, /users/{id}/edit",
+      "affected_role": "ADMIN",
+      "environment": "Lokal (Chromium 1366x768)",
+      "severity": "Medium",
+      "priority": "P2",
+      "severity_reason": "Validasi tetap bekerja (data salah tidak tersimpan), tetapi pesan tidak konsisten dengan antarmuka berbahasa Indonesia sehingga membingungkan pengguna.",
+      "priority_reason": "Muncul di setiap kesalahan panjang isian pada form pengguna; perbaikan kecil.",
+      "description": "Saat Nama Pengguna kurang dari 3 karakter atau lebih dari 50 karakter (dan Nama lebih dari 255 karakter), pesan yang tampil adalah pesan bawaan Laravel berbahasa Inggris, bukan pesan Indonesia yang sudah didefinisikan.",
+      "preconditions": "Login sebagai Administrator.",
+      "steps_to_reproduce": [
+        "Buka Pengaturan > Pengguna > + Tambah.",
+        "Isi Nama Pengguna dengan \"ab\" dan field lain dengan data valid.",
+        "Klik Simpan."
+      ],
+      "expected_result": "Pesan \"Nama Pengguna minimal 3 karakter.\" (sesuai UserValidationMessages).",
+      "actual_result": "Pesan \"The Nama Pengguna field must be at least 3 characters.\"; untuk 51 karakter: \"The Nama Pengguna field must not be greater than 50 characters.\"",
+      "evidence": [
+        "evidence/run1/screenshots/TC028_ADMIN_TAMBAH_PENGGUNA_STEP01_FAIL.png",
+        "evidence/run1/screenshots/TC029_ADMIN_TAMBAH_PENGGUNA_STEP01_FAIL.png",
+        "White-box: UserControllerPathTest::test_pesan_validasi_min_max_berbahasa_indonesia (WB-VAL-1)"
+      ],
+      "related_test_cases": ["TC028", "TC029", "WB-VAL-1"],
+      "technical_observation": "app/Http/Requests/UserValidationMessages.php memakai kunci 'min.string' dan 'max.string'. Pada array pesan kustom Laravel, format 'a.b' dibaca sebagai atribut 'a' + aturan 'b', sehingga kunci tersebut tidak pernah cocok dan Laravel memakai pesan bawaan (locale en).",
+      "recommendation": "Ganti kunci menjadi 'min' dan 'max' (semua field terkait bertipe string), lalu tambahkan test regresi pesan.",
+      "status": "Open"
+    },
+    {
+      "bug_id": "BUG-002",
+      "title": "Setelah logout, tombol Back browser menampilkan kembali halaman daftar pengguna",
+      "classification": "Confirmed Bug",
+      "module": "M01 Autentikasi",
+      "feature": "F03 Logout",
+      "affected_page": "Semua halaman setelah login (contoh: /users)",
+      "affected_role": "ADMIN, KASIR, PELANGGAN",
+      "environment": "Lokal (Chromium 1366x768)",
+      "severity": "Medium",
+      "priority": "P1",
+      "severity_reason": "Data pribadi (nama, username, email pengguna) dapat terlihat oleh orang berikutnya di komputer bersama walau sesi sudah berakhir. Aksi lanjutan tetap ditolak server, jadi tidak ada perubahan data.",
+      "priority_reason": "Menyangkut kerahasiaan data dan aplikasi kasir umumnya dipakai di komputer bersama.",
+      "description": "Setelah admin keluar (Keluar) lalu menekan tombol Back, browser menampilkan kembali halaman Pengguna lengkap dengan tabel data dari cache (back/forward cache), bukan diarahkan ke halaman login.",
+      "preconditions": "Login sebagai Administrator.",
+      "steps_to_reproduce": [
+        "Buka Pengaturan > Pengguna.",
+        "Klik menu akun di kaki sidebar > Keluar (diarahkan ke /login).",
+        "Tekan tombol Back pada browser."
+      ],
+      "expected_result": "Halaman terproteksi tidak tampil; pengguna tetap/diarahkan ke halaman login.",
+      "actual_result": "Halaman Pengguna beserta tabel data tampil kembali.",
+      "evidence": ["evidence/run1/screenshots/TC009_ADMIN_LOGOUT_STEP01_FAIL.png"],
+      "related_test_cases": ["TC009"],
+      "technical_observation": "Respons halaman terautentikasi hanya mengirim header 'Cache-Control: no-cache, private' (diverifikasi pada GET /users). Header ini tidak mencegah back/forward cache Chromium menyimpan halaman.",
+      "recommendation": "Tambahkan middleware untuk grup route 'auth' yang mengirim 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0', 'Pragma: no-cache', dan 'Expires' masa lalu.",
+      "status": "Open"
+    },
+    {
+      "bug_id": "BUG-003",
+      "title": "Tabel \"Transaksi Terbaru\" tidak menampilkan transaksi dengan tanggal masuk terbaru",
+      "classification": "Confirmed Bug",
+      "module": "M03 Dashboard",
+      "feature": "F05 Dashboard Admin, F06 Dashboard Kasir, F07 Dashboard Pelanggan",
+      "affected_page": "/dashboard/admin, /dashboard/kasir, /dashboard/pelanggan",
+      "affected_role": "ADMIN, KASIR, PELANGGAN",
+      "environment": "Lokal, data seeder (60 transaksi)",
+      "severity": "Medium",
+      "priority": "P2",
+      "severity_reason": "Informasi ringkasan dashboard menyesatkan (kasir bisa melewatkan transaksi yang baru masuk), tetapi data tidak rusak.",
+      "priority_reason": "Dashboard adalah halaman pertama setiap role; perbaikan hanya pada urutan query.",
+      "description": "Lima baris \"Transaksi Terbaru\" adalah transaksi ID 1–5 dengan tanggal acak (28 Sep, 05 Okt, 10 Nov, 26 Sep, 06 Okt 2026), sedangkan transaksi terbaru di database bertanggal 10 Nov 2026 dan seharusnya di baris pertama.",
+      "preconditions": "Database berisi transaksi dengan tanggal_masuk berbeda yang tersimpan pada waktu (created_at) yang sama, misalnya hasil seeder atau impor data.",
+      "steps_to_reproduce": [
+        "Login sebagai Kasir.",
+        "Perhatikan kolom Tanggal Masuk pada tabel Transaksi Terbaru."
+      ],
+      "expected_result": "Baris diurutkan dari tanggal masuk terbaru ke terlama; baris pertama = MAX(tanggal_masuk).",
+      "actual_result": "Urutan tanggal tidak menurun; baris pertama bertanggal 28 Sep 2026.",
+      "evidence": [
+        "evidence/run1/screenshots/TC022_KASIR_DASHBOARD_KASIR_STEP01_FAIL.png",
+        "White-box: DashboardControllerPathTest::test_transaksi_terbaru_diurutkan_dari_tanggal_masuk_terbaru (WB-DASH-D1)"
+      ],
+      "related_test_cases": ["TC022", "WB-DASH-D1"],
+      "technical_observation": "DashboardController memakai ->latest() (urut created_at). Semua transaksi seeder memiliki created_at yang sama dan tidak ada urutan cadangan, sehingga urutan ditentukan database. tanggal_masuk (tanggal bisnis) tidak dipakai.",
+      "recommendation": "Urutkan dengan orderByDesc('tanggal_masuk')->orderByDesc('id') pada dashboard admin, kasir, dan pelanggan.",
+      "status": "Open"
+    },
+    {
+      "bug_id": "BUG-004",
+      "title": "Ringkasan paginasi daftar pengguna berbahasa Inggris (\"Showing 1 to 10 of 25 results\")",
+      "classification": "Confirmed Bug",
+      "module": "M04 Manajemen Pengguna",
+      "feature": "F08 Daftar Pengguna",
+      "affected_page": "/users",
+      "affected_role": "ADMIN",
+      "environment": "Lokal (Chromium 1366x768)",
+      "severity": "Low",
+      "priority": "P3",
+      "severity_reason": "Masalah tampilan/konsistensi bahasa; fungsi paginasi tetap berjalan.",
+      "priority_reason": "Tidak menghambat pekerjaan; bisa diperbaiki bersama BUG-001.",
+      "description": "Seluruh antarmuka berbahasa Indonesia, tetapi ringkasan paginasi tampil \"Showing 1 to 10 of 25 results\".",
+      "preconditions": "Login sebagai Administrator; data pengguna lebih dari 10.",
+      "steps_to_reproduce": ["Buka Pengaturan > Pengguna.", "Lihat teks di kiri bawah tabel."],
+      "expected_result": "Teks berbahasa Indonesia, misalnya \"Menampilkan 1 sampai 10 dari 25 data\".",
+      "actual_result": "\"Showing 1 to 10 of 25 results\".",
+      "evidence": ["evidence/run1/screenshots/TC040_ADMIN_DAFTAR_PENGGUNA_STEP01_FAIL.png"],
+      "related_test_cases": ["TC040"],
+      "technical_observation": "config/app.php memakai locale default 'en' dan tidak ada berkas terjemahan Indonesia untuk view paginasi bawaan Laravel.",
+      "recommendation": "Set APP_LOCALE=id dan tambahkan lang/id.json serta lang/id/pagination.php.",
+      "status": "Open"
+    }
+  ],
+  "documentation_discrepancies": [
+    {
+      "id": "DOC-001",
+      "title": "README menyatakan Kasir dan Pelanggan dapat \"Melihat data\", tetapi belum ada halaman data selain dashboard",
+      "detail": "Tabel Role & Hak Akses di README mencentang \"Melihat data\" untuk Kasir dan Pelanggan. Discovery hanya menemukan 1 halaman (dashboard) untuk kedua role; modul layanan/transaksi/pembayaran belum memiliki halaman.",
+      "evidence": ["discovery/data/discovery-kasir.json", "discovery/data/discovery-pelanggan.json"],
+      "recommendation": "Perjelas README bahwa modul transaksi masih tahap pengembangan, atau tandai fitur yang belum tersedia."
+    },
+    {
+      "id": "DOC-002",
+      "title": "Perintah pengujian di README gagal pada PHP Laragon bawaan",
+      "detail": "README menyebut 'php artisan test' memakai SQLite in-memory; pada PHP 8.4 Laragon ekstensi pdo_sqlite tidak aktif sehingga perlu 'php -d extension=pdo_sqlite -d extension=sqlite3 vendor/phpunit/phpunit/phpunit'.",
+      "evidence": ["QA/evidence/run1/whitebox/phpunit-testdox.txt"],
+      "recommendation": "Tambahkan catatan aktivasi pdo_sqlite atau perintah alternatif di README."
+    }
+  ],
+  "enhancement_suggestions": [
+    {
+      "id": "ENH-001",
+      "title": "Nomor HP belum dibatasi hanya angka",
+      "detail": "Aturan validasi no_hp hanya 'string|max:20' (code review StoreUserRequest/UpdateUserRequest), sehingga huruf dapat tersimpan sebagai nomor HP.",
+      "recommendation": "Tambahkan regex, misalnya /^(\\+62|0)[0-9]{8,13}$/, beserta pesan Indonesia."
+    },
+    {
+      "id": "ENH-002",
+      "title": "Form belum memiliki validasi sisi klien (atribut required/maxlength)",
+      "detail": "Discovery mencatat semua field form pengguna dan login memiliki required=false dan maxlength=null; semua validasi baru terjadi setelah form dikirim ke server.",
+      "recommendation": "Tambahkan atribut required, minlength/maxlength sesuai aturan server agar umpan balik lebih cepat (validasi server tetap dipertahankan)."
+    }
+  ]
+}

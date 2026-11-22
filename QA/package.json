@@ -1,0 +1,23 @@
+{
+  "name": "silaundry-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QA SiLaundry: Application Discovery + Website QA Automation (Playwright)",
+  "scripts": {
+    "setup": "npm install && npx playwright install chromium",
+    "auth:save": "node scripts/save-auth.js",
+    "discover": "node scripts/discover.js",
+    "test": "playwright test",
+    "test:env": "playwright test tests/00-environment.spec.js",
+    "test:headed": "playwright test --headed",
+    "report:html": "playwright show-report results/html",
+    "clean": "node scripts/clean.js",
+    "auth:login": "node scripts/login-auth.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}

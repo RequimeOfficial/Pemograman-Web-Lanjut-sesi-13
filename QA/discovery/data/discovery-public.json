@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-11-22T11:51:06.231Z",
+  "base_url": "http://127.0.0.1:8000",
+  "role": "PUBLIC",
+  "method": "Playwright read-only crawler (link traversal, tanpa submit form)",
+  "max_pages": 30,
+  "skip_patterns": [
+    "logout",
+    "keluar",
+    "delete",
+    "hapus",
+    "destroy",
+    "remove"
+  ],
+  "unvisited_in_queue": [],
+  "pages": [
+    {
+      "page_id": "P001",
+      "role": "PUBLIC",
+      "requested_url": "http://127.0.0.1:8000/",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/login",
+      "redirected": true,
+      "title": "Masuk — SiLaundry",
+      "headings": [
+        "H1: SiLaundry"
+      ],
+      "navigation": [],
+      "links": [],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/login",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "email",
+              "name": "email",
+              "id": "email",
+              "label": "Email",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "mis. admin@silaundry.test"
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password",
+              "id": "password",
+              "label": "Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "••••••••"
+            },
+            {
+              "tag": "input",
+              "type": "checkbox",
+              "name": "remember",
+              "id": null,
+              "label": "Ingat saya",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            }
+          ],
+          "buttons": [
+            "Masuk"
+          ]
+        }
+      ],
+      "buttons": [
+        "Masuk"
+      ],
+      "tables": [],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P001_PUBLIC_login.png",
+      "console_errors": [],
+      "failed_requests": []
+    }
+  ]
+}

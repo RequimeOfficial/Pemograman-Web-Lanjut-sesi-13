@@ -1,0 +1,1693 @@
+{
+  "generated_at": "2026-11-22T11:52:41.499Z",
+  "base_url": "http://127.0.0.1:8000",
+  "role": "ADMIN",
+  "method": "Playwright read-only crawler (link traversal, tanpa submit form)",
+  "max_pages": 10,
+  "skip_patterns": [
+    "logout",
+    "keluar",
+    "delete",
+    "hapus",
+    "destroy",
+    "remove"
+  ],
+  "unvisited_in_queue": [
+    "http://127.0.0.1:8000/users/21/edit",
+    "http://127.0.0.1:8000/users/20/edit",
+    "http://127.0.0.1:8000/users/19/edit",
+    "http://127.0.0.1:8000/users/18/edit",
+    "http://127.0.0.1:8000/users/17/edit",
+    "http://127.0.0.1:8000/users/16/edit",
+    "http://127.0.0.1:8000/users?page=2",
+    "http://127.0.0.1:8000/users?page=3",
+    "http://127.0.0.1:8000/users/1/edit",
+    "http://127.0.0.1:8000/users/3/edit",
+    "http://127.0.0.1:8000/users/2/edit",
+    "http://127.0.0.1:8000/users?role=pelanggan&page=2",
+    "http://127.0.0.1:8000/users?role=pelanggan&page=3"
+  ],
+  "pages": [
+    {
+      "page_id": "P001",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/dashboard/admin",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/dashboard/admin",
+      "redirected": false,
+      "title": "Dashboard · SiLaundry",
+      "headings": [
+        "H1: Selamat malam, Administrator SiLaundry",
+        "H2: RINGKASAN",
+        "H2: PENGGUNA PER PERAN",
+        "H3: Transaksi Terbaru"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Tambah Pengguna",
+          "href": "http://127.0.0.1:8000/users/create"
+        },
+        {
+          "text": "TOTAL PENGGUNA 25",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "ADMINISTRATOR 1",
+          "href": "http://127.0.0.1:8000/users?role=admin"
+        },
+        {
+          "text": "KASIR 2",
+          "href": "http://127.0.0.1:8000/users?role=kasir"
+        },
+        {
+          "text": "PELANGGAN 22",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "Tambah Pengguna"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "ID",
+            "PELANGGAN",
+            "LAYANAN",
+            "BERAT",
+            "TOTAL HARGA",
+            "TANGGAL MASUK",
+            "STATUS"
+          ],
+          "row_count": 5
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P001_ADMIN_dashboard-admin.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P002",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users",
+      "redirected": false,
+      "title": "Pengguna · SiLaundry",
+      "headings": [
+        "H1: Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "2",
+          "href": "http://127.0.0.1:8000/users?page=2"
+        },
+        {
+          "text": "3",
+          "href": "http://127.0.0.1:8000/users?page=3"
+        },
+        {
+          "text": "",
+          "href": "http://127.0.0.1:8000/users?page=2"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "+ Tambah",
+          "href": "http://127.0.0.1:8000/users/create"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/25/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/24/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/23/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/22/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/21/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/20/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/19/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/18/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/17/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/16/edit"
+        },
+        {
+          "text": "Next »",
+          "href": "http://127.0.0.1:8000/users?page=2"
+        },
+        {
+          "text": "2",
+          "href": "http://127.0.0.1:8000/users?page=2"
+        },
+        {
+          "text": "3",
+          "href": "http://127.0.0.1:8000/users?page=3"
+        },
+        {
+          "text": "",
+          "href": "http://127.0.0.1:8000/users?page=2"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "GET",
+          "action": "http://127.0.0.1:8000/users",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "q",
+              "id": null,
+              "label": "Cari nama / email / username…",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Cari nama / email / username…"
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": null,
+              "label": "",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "Semua peran",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            }
+          ],
+          "buttons": [
+            "Cari"
+          ]
+        },
+        {
+          "form_index": 3,
+          "id": null,
+          "method": "POST",
+          "action": "",
+          "fields": [],
+          "buttons": [
+            "Batal",
+            "Hapus"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "+ Tambah",
+        "Cari",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "NAMA",
+            "USERNAME",
+            "EMAIL",
+            "PERAN",
+            "AKSI"
+          ],
+          "row_count": 10
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P002_ADMIN_users.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P003",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users/create",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users/create",
+      "redirected": false,
+      "title": "Tambah Pengguna · SiLaundry",
+      "headings": [
+        "H1: Tambah Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Batal",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/users",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "name",
+              "id": "name",
+              "label": "Nama Lengkap *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "username",
+              "id": "username",
+              "label": "Nama Pengguna *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "email",
+              "name": "email",
+              "id": "email",
+              "label": "Email *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": "role",
+              "label": "Peran *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "— Pilih —",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password",
+              "id": "password",
+              "label": "Kata Sandi *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password_confirmation",
+              "id": "password_confirmation",
+              "label": "Konfirmasi Kata Sandi *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "no_hp",
+              "id": "no_hp",
+              "label": "Nomor HP *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "alamat",
+              "id": "alamat",
+              "label": "Alamat *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            }
+          ],
+          "buttons": [
+            "Simpan"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "Simpan",
+        "Batal"
+      ],
+      "tables": [],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P003_ADMIN_users-create.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P004",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users?role=admin",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users?role=admin",
+      "redirected": false,
+      "title": "Pengguna · SiLaundry",
+      "headings": [
+        "H1: Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "+ Tambah",
+          "href": "http://127.0.0.1:8000/users/create"
+        },
+        {
+          "text": "Reset",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/1/edit"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "GET",
+          "action": "http://127.0.0.1:8000/users",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "q",
+              "id": null,
+              "label": "Cari nama / email / username…",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Cari nama / email / username…"
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": null,
+              "label": "",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "Semua peran",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            }
+          ],
+          "buttons": [
+            "Cari"
+          ]
+        },
+        {
+          "form_index": 3,
+          "id": null,
+          "method": "POST",
+          "action": "",
+          "fields": [],
+          "buttons": [
+            "Batal",
+            "Hapus"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "+ Tambah",
+        "Cari",
+        "Reset"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "NAMA",
+            "USERNAME",
+            "EMAIL",
+            "PERAN",
+            "AKSI"
+          ],
+          "row_count": 1
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P004_ADMIN_users.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P005",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users?role=kasir",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users?role=kasir",
+      "redirected": false,
+      "title": "Pengguna · SiLaundry",
+      "headings": [
+        "H1: Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "+ Tambah",
+          "href": "http://127.0.0.1:8000/users/create"
+        },
+        {
+          "text": "Reset",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/3/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/2/edit"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "GET",
+          "action": "http://127.0.0.1:8000/users",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "q",
+              "id": null,
+              "label": "Cari nama / email / username…",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Cari nama / email / username…"
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": null,
+              "label": "",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "Semua peran",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            }
+          ],
+          "buttons": [
+            "Cari"
+          ]
+        },
+        {
+          "form_index": 3,
+          "id": null,
+          "method": "POST",
+          "action": "",
+          "fields": [],
+          "buttons": [
+            "Batal",
+            "Hapus"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "+ Tambah",
+        "Cari",
+        "Reset",
+        "Hapus",
+        "Hapus"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "NAMA",
+            "USERNAME",
+            "EMAIL",
+            "PERAN",
+            "AKSI"
+          ],
+          "row_count": 2
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P005_ADMIN_users.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P006",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users?role=pelanggan",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users?role=pelanggan",
+      "redirected": false,
+      "title": "Pengguna · SiLaundry",
+      "headings": [
+        "H1: Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "2",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=2"
+        },
+        {
+          "text": "3",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=3"
+        },
+        {
+          "text": "",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=2"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "+ Tambah",
+          "href": "http://127.0.0.1:8000/users/create"
+        },
+        {
+          "text": "Reset",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/25/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/24/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/23/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/22/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/21/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/20/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/19/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/18/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/17/edit"
+        },
+        {
+          "text": "Ubah",
+          "href": "http://127.0.0.1:8000/users/16/edit"
+        },
+        {
+          "text": "Next »",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=2"
+        },
+        {
+          "text": "2",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=2"
+        },
+        {
+          "text": "3",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=3"
+        },
+        {
+          "text": "",
+          "href": "http://127.0.0.1:8000/users?role=pelanggan&page=2"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "GET",
+          "action": "http://127.0.0.1:8000/users",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "q",
+              "id": null,
+              "label": "Cari nama / email / username…",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Cari nama / email / username…"
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": null,
+              "label": "",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "Semua peran",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            }
+          ],
+          "buttons": [
+            "Cari"
+          ]
+        },
+        {
+          "form_index": 3,
+          "id": null,
+          "method": "POST",
+          "action": "",
+          "fields": [],
+          "buttons": [
+            "Batal",
+            "Hapus"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "+ Tambah",
+        "Cari",
+        "Reset",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus",
+        "Hapus"
+      ],
+      "tables": [
+        {
+          "headers": [
+            "NAMA",
+            "USERNAME",
+            "EMAIL",
+            "PERAN",
+            "AKSI"
+          ],
+          "row_count": 10
+        }
+      ],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P006_ADMIN_users.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P007",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users/25/edit",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users/25/edit",
+      "redirected": false,
+      "title": "Ubah Pengguna · SiLaundry",
+      "headings": [
+        "H1: Ubah Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Batal",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/users/25",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "name",
+              "id": "name",
+              "label": "Nama Lengkap *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "username",
+              "id": "username",
+              "label": "Nama Pengguna *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "email",
+              "name": "email",
+              "id": "email",
+              "label": "Email *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": "role",
+              "label": "Peran *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "— Pilih —",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password",
+              "id": "password",
+              "label": "Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Kosongkan bila tidak diubah"
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password_confirmation",
+              "id": "password_confirmation",
+              "label": "Konfirmasi Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "no_hp",
+              "id": "no_hp",
+              "label": "Nomor HP *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "alamat",
+              "id": "alamat",
+              "label": "Alamat *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            }
+          ],
+          "buttons": [
+            "Simpan"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "Simpan",
+        "Batal"
+      ],
+      "tables": [],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P007_ADMIN_users-25-edit.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P008",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users/24/edit",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users/24/edit",
+      "redirected": false,
+      "title": "Ubah Pengguna · SiLaundry",
+      "headings": [
+        "H1: Ubah Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Batal",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/users/24",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "name",
+              "id": "name",
+              "label": "Nama Lengkap *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "username",
+              "id": "username",
+              "label": "Nama Pengguna *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "email",
+              "name": "email",
+              "id": "email",
+              "label": "Email *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": "role",
+              "label": "Peran *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "— Pilih —",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password",
+              "id": "password",
+              "label": "Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Kosongkan bila tidak diubah"
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password_confirmation",
+              "id": "password_confirmation",
+              "label": "Konfirmasi Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "no_hp",
+              "id": "no_hp",
+              "label": "Nomor HP *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "alamat",
+              "id": "alamat",
+              "label": "Alamat *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            }
+          ],
+          "buttons": [
+            "Simpan"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "Simpan",
+        "Batal"
+      ],
+      "tables": [],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P008_ADMIN_users-24-edit.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P009",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users/23/edit",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users/23/edit",
+      "redirected": false,
+      "title": "Ubah Pengguna · SiLaundry",
+      "headings": [
+        "H1: Ubah Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Batal",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/users/23",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "name",
+              "id": "name",
+              "label": "Nama Lengkap *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "username",
+              "id": "username",
+              "label": "Nama Pengguna *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "email",
+              "name": "email",
+              "id": "email",
+              "label": "Email *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": "role",
+              "label": "Peran *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "— Pilih —",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password",
+              "id": "password",
+              "label": "Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Kosongkan bila tidak diubah"
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password_confirmation",
+              "id": "password_confirmation",
+              "label": "Konfirmasi Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "no_hp",
+              "id": "no_hp",
+              "label": "Nomor HP *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "alamat",
+              "id": "alamat",
+              "label": "Alamat *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            }
+          ],
+          "buttons": [
+            "Simpan"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "Simpan",
+        "Batal"
+      ],
+      "tables": [],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P009_ADMIN_users-23-edit.png",
+      "console_errors": [],
+      "failed_requests": []
+    },
+    {
+      "page_id": "P010",
+      "role": "ADMIN",
+      "requested_url": "http://127.0.0.1:8000/users/22/edit",
+      "discovery_status": "Discovered",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8000/users/22/edit",
+      "redirected": false,
+      "title": "Ubah Pengguna · SiLaundry",
+      "headings": [
+        "H1: Ubah Pengguna"
+      ],
+      "navigation": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "links": [
+        {
+          "text": "SiLaundry",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Dashboard",
+          "href": "http://127.0.0.1:8000/dashboard/admin"
+        },
+        {
+          "text": "Pengguna",
+          "href": "http://127.0.0.1:8000/users"
+        },
+        {
+          "text": "Batal",
+          "href": "http://127.0.0.1:8000/users"
+        }
+      ],
+      "forms": [
+        {
+          "form_index": 1,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/logout",
+          "fields": [],
+          "buttons": [
+            "Keluar"
+          ]
+        },
+        {
+          "form_index": 2,
+          "id": null,
+          "method": "POST",
+          "action": "http://127.0.0.1:8000/users/22",
+          "fields": [
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "name",
+              "id": "name",
+              "label": "Nama Lengkap *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "username",
+              "id": "username",
+              "label": "Nama Pengguna *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "email",
+              "name": "email",
+              "id": "email",
+              "label": "Email *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "select",
+              "type": "select-one",
+              "name": "role",
+              "id": "role",
+              "label": "Peran *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null,
+              "options": [
+                "— Pilih —",
+                "Administrator",
+                "Kasir",
+                "Pelanggan"
+              ]
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password",
+              "id": "password",
+              "label": "Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": "Kosongkan bila tidak diubah"
+            },
+            {
+              "tag": "input",
+              "type": "password",
+              "name": "password_confirmation",
+              "id": "password_confirmation",
+              "label": "Konfirmasi Kata Sandi",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "no_hp",
+              "id": "no_hp",
+              "label": "Nomor HP *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            },
+            {
+              "tag": "input",
+              "type": "text",
+              "name": "alamat",
+              "id": "alamat",
+              "label": "Alamat *",
+              "required": false,
+              "maxlength": null,
+              "pattern": null,
+              "placeholder": null
+            }
+          ],
+          "buttons": [
+            "Simpan"
+          ]
+        }
+      ],
+      "buttons": [
+        "Pengaturan",
+        "AD Administrator SiLaundry Administrator",
+        "Simpan",
+        "Batal"
+      ],
+      "tables": [],
+      "alerts": [],
+      "screenshot": "discovery/screenshots/P010_ADMIN_users-22-edit.png",
+      "console_errors": [],
+      "failed_requests": []
+    }
+  ]
+}
