@@ -30,10 +30,27 @@
         "evidence/run1/screenshots/TC029_ADMIN_TAMBAH_PENGGUNA_STEP01_FAIL.png",
         "White-box: UserControllerPathTest::test_pesan_validasi_min_max_berbahasa_indonesia (WB-VAL-1)"
       ],
-      "related_test_cases": ["TC028", "TC029", "WB-VAL-1"],
+      "related_test_cases": [
+        "TC028",
+        "TC029",
+        "WB-VAL-1"
+      ],
       "technical_observation": "app/Http/Requests/UserValidationMessages.php memakai kunci 'min.string' dan 'max.string'. Pada array pesan kustom Laravel, format 'a.b' dibaca sebagai atribut 'a' + aturan 'b', sehingga kunci tersebut tidak pernah cocok. Karena belum ada lang/id/validation.php, Laravel memakai pesan bawaan fallback locale 'en'.",
       "recommendation": "Ganti kunci menjadi 'min' dan 'max' (semua field terkait bertipe string), lalu tambahkan test regresi pesan.",
-      "status": "Open"
+      "status": "Verified",
+      "fix": {
+        "commit": "46f5df1",
+        "files": "app/Http/Requests/UserValidationMessages.php"
+      },
+      "retest": {
+        "run": "Run 2",
+        "test_cases": "TC028, TC029, WB-VAL-1",
+        "result": "PASS",
+        "evidence": [
+          "screenshots/TC028_ADMIN_TAMBAH_PENGGUNA_STEP01_PASS.png",
+          "screenshots/TC029_ADMIN_TAMBAH_PENGGUNA_STEP01_PASS.png"
+        ]
+      }
     },
     {
       "bug_id": "BUG-002",
@@ -57,11 +74,27 @@
       ],
       "expected_result": "Halaman terproteksi tidak tampil; pengguna tetap/diarahkan ke halaman login.",
       "actual_result": "Halaman Pengguna beserta tabel data tampil kembali.",
-      "evidence": ["evidence/run1/screenshots/TC009_ADMIN_LOGOUT_STEP01_FAIL.png"],
-      "related_test_cases": ["TC009"],
+      "evidence": [
+        "evidence/run1/screenshots/TC009_ADMIN_LOGOUT_STEP01_FAIL.png"
+      ],
+      "related_test_cases": [
+        "TC009"
+      ],
       "technical_observation": "Respons halaman terautentikasi hanya mengirim header 'Cache-Control: no-cache, private' (diverifikasi pada GET /users). Header ini tidak mencegah back/forward cache Chromium menyimpan halaman.",
       "recommendation": "Tambahkan middleware untuk grup route 'auth' yang mengirim 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0', 'Pragma: no-cache', dan 'Expires' masa lalu.",
-      "status": "Open"
+      "status": "Verified",
+      "fix": {
+        "commit": "3b79913",
+        "files": "app/Http/Middleware/PreventBackHistory.php, bootstrap/app.php, routes/web.php"
+      },
+      "retest": {
+        "run": "Run 2",
+        "test_cases": "TC009, WB-SEC-1 (test regresi baru)",
+        "result": "PASS",
+        "evidence": [
+          "screenshots/TC009_ADMIN_LOGOUT_STEP01_PASS.png"
+        ]
+      }
     },
     {
       "bug_id": "BUG-003",
@@ -88,10 +121,25 @@
         "evidence/run1/screenshots/TC022_KASIR_DASHBOARD_KASIR_STEP01_FAIL.png",
         "White-box: DashboardControllerPathTest::test_transaksi_terbaru_diurutkan_dari_tanggal_masuk_terbaru (WB-DASH-D1)"
       ],
-      "related_test_cases": ["TC022", "WB-DASH-D1"],
+      "related_test_cases": [
+        "TC022",
+        "WB-DASH-D1"
+      ],
       "technical_observation": "DashboardController memakai ->latest() (urut created_at). Semua transaksi seeder memiliki created_at yang sama dan tidak ada urutan cadangan, sehingga urutan ditentukan database. tanggal_masuk (tanggal bisnis) tidak dipakai.",
       "recommendation": "Urutkan dengan orderByDesc('tanggal_masuk')->orderByDesc('id') pada dashboard admin, kasir, dan pelanggan.",
-      "status": "Open"
+      "status": "Verified",
+      "fix": {
+        "commit": "ad0282f",
+        "files": "app/Http/Controllers/DashboardController.php"
+      },
+      "retest": {
+        "run": "Run 2",
+        "test_cases": "TC022, WB-DASH-D1",
+        "result": "PASS",
+        "evidence": [
+          "screenshots/TC022_KASIR_DASHBOARD_KASIR_STEP01_PASS.png"
+        ]
+      }
     },
     {
       "bug_id": "BUG-004",
@@ -108,14 +156,33 @@
       "priority_reason": "Tidak menghambat pekerjaan; bisa diperbaiki bersama BUG-001.",
       "description": "Seluruh antarmuka berbahasa Indonesia, tetapi ringkasan paginasi tampil \"Showing 1 to 10 of 25 results\".",
       "preconditions": "Login sebagai Administrator; data pengguna lebih dari 10.",
-      "steps_to_reproduce": ["Buka Pengaturan > Pengguna.", "Lihat teks di kiri bawah tabel."],
+      "steps_to_reproduce": [
+        "Buka Pengaturan > Pengguna.",
+        "Lihat teks di kiri bawah tabel."
+      ],
       "expected_result": "Teks berbahasa Indonesia, misalnya \"Menampilkan 1 sampai 10 dari 25 data\".",
       "actual_result": "\"Showing 1 to 10 of 25 results\".",
-      "evidence": ["evidence/run1/screenshots/TC040_ADMIN_DAFTAR_PENGGUNA_STEP01_FAIL.png"],
-      "related_test_cases": ["TC040"],
+      "evidence": [
+        "evidence/run1/screenshots/TC040_ADMIN_DAFTAR_PENGGUNA_STEP01_FAIL.png"
+      ],
+      "related_test_cases": [
+        "TC040"
+      ],
       "technical_observation": "APP_LOCALE sudah 'id', tetapi folder lang/ belum berisi terjemahan Indonesia untuk string view paginasi bawaan Laravel ('Showing', 'to', 'of', 'results', 'pagination.previous/next'), sehingga teks Inggris tampil apa adanya.",
       "recommendation": "Tambahkan lang/id.json dan lang/id/pagination.php.",
-      "status": "Open"
+      "status": "Verified",
+      "fix": {
+        "commit": "24c7a7d",
+        "files": "lang/id.json, lang/id/pagination.php"
+      },
+      "retest": {
+        "run": "Run 2",
+        "test_cases": "TC040",
+        "result": "PASS",
+        "evidence": [
+          "screenshots/TC040_ADMIN_DAFTAR_PENGGUNA_STEP01_PASS.png"
+        ]
+      }
     }
   ],
   "documentation_discrepancies": [
@@ -123,14 +190,19 @@
       "id": "DOC-001",
       "title": "README menyatakan Kasir dan Pelanggan dapat \"Melihat data\", tetapi belum ada halaman data selain dashboard",
       "detail": "Tabel Role & Hak Akses di README mencentang \"Melihat data\" untuk Kasir dan Pelanggan. Discovery hanya menemukan 1 halaman (dashboard) untuk kedua role; modul layanan/transaksi/pembayaran belum memiliki halaman.",
-      "evidence": ["discovery/data/discovery-kasir.json", "discovery/data/discovery-pelanggan.json"],
+      "evidence": [
+        "discovery/data/discovery-kasir.json",
+        "discovery/data/discovery-pelanggan.json"
+      ],
       "recommendation": "Perjelas README bahwa modul transaksi masih tahap pengembangan, atau tandai fitur yang belum tersedia."
     },
     {
       "id": "DOC-002",
       "title": "Perintah pengujian di README gagal pada PHP Laragon bawaan",
       "detail": "README menyebut 'php artisan test' memakai SQLite in-memory; pada PHP 8.4 Laragon ekstensi pdo_sqlite tidak aktif sehingga perlu 'php -d extension=pdo_sqlite -d extension=sqlite3 vendor/phpunit/phpunit/phpunit'.",
-      "evidence": ["QA/evidence/run1/whitebox/phpunit-testdox.txt"],
+      "evidence": [
+        "QA/evidence/run1/whitebox/phpunit-testdox.txt"
+      ],
       "recommendation": "Tambahkan catatan aktivasi pdo_sqlite atau perintah alternatif di README."
     }
   ],
@@ -147,5 +219,6 @@
       "detail": "Discovery mencatat semua field form pengguna dan login memiliki required=false dan maxlength=null; semua validasi baru terjadi setelah form dikirim ke server.",
       "recommendation": "Tambahkan atribut required, minlength/maxlength sesuai aturan server agar umpan balik lebih cepat (validasi server tetap dipertahankan)."
     }
-  ]
+  ],
+  "retest_run": "Run 2 (2026-11-22): regresi penuh 44 test black-box PASS, 67 test PHPUnit PASS"
 }

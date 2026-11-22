@@ -1,0 +1,44 @@
+{"test_case_id":"TC000","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC001","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC002","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC003","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC004","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC005","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC006","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC007","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC008","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC009","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC010","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC011","status":"PASS","console_errors":["Failed to load resource: the server responded with a status of 403 (Forbidden)","Failed to load resource: the server responded with a status of 403 (Forbidden)","Failed to load resource: the server responded with a status of 403 (Forbidden)"],"failed_requests":["HTTP 403 GET http://127.0.0.1:8000/users/create","HTTP 403 GET http://127.0.0.1:8000/users/1/edit","HTTP 403 GET http://127.0.0.1:8000/users"]}
+{"test_case_id":"TC012","status":"PASS","console_errors":["Failed to load resource: the server responded with a status of 403 (Forbidden)","Failed to load resource: the server responded with a status of 403 (Forbidden)","Failed to load resource: the server responded with a status of 403 (Forbidden)"],"failed_requests":["HTTP 403 GET http://127.0.0.1:8000/dashboard/kasir","HTTP 403 GET http://127.0.0.1:8000/users","HTTP 403 GET http://127.0.0.1:8000/dashboard/admin"]}
+{"test_case_id":"TC013","status":"PASS","console_errors":["Failed to load resource: the server responded with a status of 403 (Forbidden)","Failed to load resource: the server responded with a status of 403 (Forbidden)"],"failed_requests":["HTTP 403 GET http://127.0.0.1:8000/dashboard/pelanggan","HTTP 403 GET http://127.0.0.1:8000/dashboard/kasir"]}
+{"test_case_id":"TC014","status":"PASS","console_errors":["Failed to load resource: the server responded with a status of 403 (Forbidden)"],"failed_requests":["HTTP 403 GET http://127.0.0.1:8000/users"]}
+{"test_case_id":"TC015","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC016","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC017","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC018","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC019","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC020","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC021","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC022","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC023","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC024","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC025","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC026","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC027","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC028","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC029","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC030","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC031","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC032","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC033","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC034","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC035","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC036","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC037","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC038","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC039","status":"PASS","console_errors":["Failed to load resource: the server responded with a status of 404 (Not Found)"],"failed_requests":["HTTP 404 GET http://127.0.0.1:8000/users/999999/edit"]}
+{"test_case_id":"TC040","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC041","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC042","status":"PASS","console_errors":[],"failed_requests":[]}
+{"test_case_id":"TC043","status":"PASS","console_errors":[],"failed_requests":[]}
