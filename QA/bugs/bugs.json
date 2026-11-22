@@ -31,7 +31,7 @@
         "White-box: UserControllerPathTest::test_pesan_validasi_min_max_berbahasa_indonesia (WB-VAL-1)"
       ],
       "related_test_cases": ["TC028", "TC029", "WB-VAL-1"],
-      "technical_observation": "app/Http/Requests/UserValidationMessages.php memakai kunci 'min.string' dan 'max.string'. Pada array pesan kustom Laravel, format 'a.b' dibaca sebagai atribut 'a' + aturan 'b', sehingga kunci tersebut tidak pernah cocok dan Laravel memakai pesan bawaan (locale en).",
+      "technical_observation": "app/Http/Requests/UserValidationMessages.php memakai kunci 'min.string' dan 'max.string'. Pada array pesan kustom Laravel, format 'a.b' dibaca sebagai atribut 'a' + aturan 'b', sehingga kunci tersebut tidak pernah cocok. Karena belum ada lang/id/validation.php, Laravel memakai pesan bawaan fallback locale 'en'.",
       "recommendation": "Ganti kunci menjadi 'min' dan 'max' (semua field terkait bertipe string), lalu tambahkan test regresi pesan.",
       "status": "Open"
     },
@@ -113,8 +113,8 @@
       "actual_result": "\"Showing 1 to 10 of 25 results\".",
       "evidence": ["evidence/run1/screenshots/TC040_ADMIN_DAFTAR_PENGGUNA_STEP01_FAIL.png"],
       "related_test_cases": ["TC040"],
-      "technical_observation": "config/app.php memakai locale default 'en' dan tidak ada berkas terjemahan Indonesia untuk view paginasi bawaan Laravel.",
-      "recommendation": "Set APP_LOCALE=id dan tambahkan lang/id.json serta lang/id/pagination.php.",
+      "technical_observation": "APP_LOCALE sudah 'id', tetapi folder lang/ belum berisi terjemahan Indonesia untuk string view paginasi bawaan Laravel ('Showing', 'to', 'of', 'results', 'pagination.previous/next'), sehingga teks Inggris tampil apa adanya.",
+      "recommendation": "Tambahkan lang/id.json dan lang/id/pagination.php.",
       "status": "Open"
     }
   ],
